@@ -29,7 +29,7 @@ class PersonIn(BaseModel):
 
 
 class Person(PersonIn):
-    id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
+    id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")\
 
     class Config:
         allow_population_by_field_name = True
