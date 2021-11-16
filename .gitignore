@@ -1,4 +1,7 @@
 env/
 .env
+.env_*
 .vscode
 __pycache__
+*.xlsx
+docker-compose-dev.yml

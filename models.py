@@ -1,3 +1,5 @@
+from typing import Optional
+
 from bson import ObjectId
 from pydantic import BaseModel, HttpUrl, Field
 
@@ -18,20 +20,36 @@ class PyObjectId(ObjectId):
         field_schema.update(type="string")
 
 
-class Item(BaseModel):
+class OMC(BaseModel):
     name: str
-    color: str
+    petrol_price: float
+    diesel_price: float
 
 
-class PersonIn(BaseModel):
-    name: str
-    age: int
-
-
-class Person(PersonIn):
-    id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")\
+class OMCInDB(OMC):
+    id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
 
     class Config:
         allow_population_by_field_name = True
         arbitrary_types_allowed = True
         json_encoders = {ObjectId: str}
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
+class TokenData(BaseModel):
+    username: Optional[str] = None
+
+
+class User(BaseModel):
+    username: str
+    email: Optional[str] = None
+    full_name: Optional[str] = None
+    disabled: Optional[bool] = None
+
+
+class UserInDB(User):
+    hashed_password: str

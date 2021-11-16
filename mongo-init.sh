@@ -1,7 +1,7 @@
 set -e
 
 mongo <<EOF
-use $MONGO_INITDB_DATABASE
+use $MONGO_INITDB_DATABASE_ADMIN
 
 
 db.createUser(
@@ -11,7 +11,7 @@ db.createUser(
         roles: [
             {
                 role: "readWrite",
-                db: '$MONGO_INITDB_DATABASE'
+                db: '$MONGO_INITDB_DATABASE_PROJECT'
             }
         ]
     }
